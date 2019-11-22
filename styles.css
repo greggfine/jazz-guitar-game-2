@@ -132,6 +132,7 @@ img {
   left: 40px;
   width: 40px;
   height: 30px;
+  text-align: center;
 }
 
 .who-is-this {
@@ -186,9 +187,6 @@ img {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   border-radius: 5px;
   font-size: 24px;
   cursor: pointer;
@@ -216,6 +214,11 @@ img {
   font-size: 4rem;
   color: darkgreen;
   padding-right: 10px;
+}
+
+.start-game-btn span, .play-again-btn span {
+  position: relative;
+  top: 17px;
 }
 
 .youtube-wrapper {
