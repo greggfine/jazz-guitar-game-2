@@ -3,10 +3,11 @@
 (function() {
 
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    let buffer, successSFXBuffer, failureSFXBuffer;
+    let buffer, successSFXBuffer, failureSFXBuffer, gameOverSFXBuffer;
     let gainNode = ctx.createGain();
     let gainNode2 = ctx.createGain();
     let gainNode3 = ctx.createGain();
+    let gainNode4 = ctx.createGain();
     let gainNodeMaster = ctx.createGain();
 
     const score = document.querySelector('.score'),
@@ -23,15 +24,12 @@
           btnGroup = playGame.querySelector('.btn-group'),
           gameOverDisplay = document.querySelector('.game-over'),
           container = document.querySelector('.container'),
-          gameOverSFX = document.createElement('audio'),
           img = document.createElement('img');
     
     let scoreCount = 0,
         questionCountCounter = 1,
         livesCount = 3,
         currentTrack;
-
-        gameOverSFX.src = './audio/sfx/game_over/Cutting Power.mp3';
         
     score.textContent = scoreCount;
     questionCount.textContent = `${questionCountCounter}/10`;
@@ -51,7 +49,7 @@
           getRandomName = (arr) => arr[Math.floor(Math.random() * guitaristNames.length)];
 
     function init() {
-        gameOverSFX.muted = true; 
+        gainNode4.gain.value = 0;
         startGameDisplay.style.display = 'none';
         whoIsThis.style.display = playGame.style.display = container.style.display = 'block';
         gameOverDisplay.textContent = '';
@@ -131,6 +129,18 @@
         gainNode.gain.setTargetAtTime(0, ctx.currentTime, 0.030);
         buffer.stop(ctx.currentTime + 0.030);
     }
+
+    function revealFinalCorrectAnswer() {
+        displayImage();
+        displayName();
+        gainNode.gain.setTargetAtTime(0, ctx.currentTime, 0.030);
+        var isSafari = window.safari !== undefined;
+        if (isSafari) {
+            buffer.disconnect(ctx.destination);
+        } else {
+            buffer.stop(ctx.currentTime);
+        }
+    }
     
     function setupNextQuestion(){
         revealCorrectAnswer();
@@ -156,10 +166,15 @@
     }
 
     function setGameOver(){
-        revealCorrectAnswer();
+        revealFinalCorrectAnswer();
         setTimeout(() => {
-            gameOverSFX.muted = false;
-            gameOverSFX.play();
+            gameOverSFXBuffer = ctx.createBufferSource();
+            getAudioData('./audio/sfx/game_over/Cutting Power.mp3', gameOverSFXBuffer);
+            gameOverSFXBuffer.start();
+            gainNode4.gain.setValueAtTime(1, ctx.currentTime);
+            gameOverSFXBuffer.connect(gainNode4);
+            gainNode4.connect(gainNodeMaster);
+            gainNodeMaster.connect(ctx.destination);
             img.style.display = playGame.style.display = 'none';
             gameOverDisplay.innerHTML = `<h1>Game Over<h1>
                                         <h2>Final Score: ${scoreCount}<h2>`
