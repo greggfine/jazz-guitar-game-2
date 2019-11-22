@@ -1,0 +1,24 @@
+{
+  "name": "jazz-guitar-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greggfine/jazz-guitar-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/greggfine/jazz-guitar-game/issues"
+  },
+  "homepage": "https://greggfine.github.io/jazz-guitar-game/",
+  "dependencies": {
+    "gh-pages": "^2.1.1"
+  }
+}

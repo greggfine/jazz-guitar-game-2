@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Name The Jazz Guitarist!</title>
+    <meta property="og:url" content="https://greggfine.github.io/jazz-guitar-game/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Name The Jazz Guitarist!" />
+    <meta property="og:description" content="Try to guess which Jazz guitarist you're listening to." />
+    <meta property="og:image" content="https://greggfine.github.io/jazz-guitar-game/og-image-facebook.jpeg" />
+    <meta property="og:image:width" content="1076px" />
+    <meta property="og:image:height" content="513px" />
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="start-game-display">
+            <h1>Name The Jazz Guitarist!</h1>
+            <button class="start-game-btn">
+                <i class="fa fa-play" aria-hidden="true"></i> <span>Start Game</span>  
+            </button>
+        </div>
+
+        <div class="play-game">
+            
+            <div class="lives-score-count-wrapper">
+                <h2 class="lives-wrapper">Lives: <span class="lives"></span></h2>
+                <h2 class="question-count-wrapper"><span class="question-count"></span></h2>
+                <h2 class="score-wrapper">Score: <span class="score"></span></h2>
+            </div>
+            
+            <div class="question-answer-display">
+                <img class="who-is-this" src="./images/guitar-transparent-6.png" alt="Guitar Icon">
+            </div>
+
+            <div class="controls-buttons-wrapper">
+                <button class="volume-control">
+                    <i class="fa fa-volume-up" aria-hidden="true"></i>
+                </button>
+                <div class="btn-group"></div>
+            </div>
+
+        </div>
+
+        <div class="game-over"></div>
+
+    </div>
+
+    <a class="youtube-wrapper" href="https://www.youtube.com/channel/UCWFnxg02ITStRxn4sotkJng?view_as=subscriber" target="_blank" rel="noopener">
+        <img src="./images/gf_profile-pic.jpeg" alt="Gregg Fine Profile Pic" class="profile-pic">
+        <div class="channel-title-icon-wrapper">
+            <p>Gregg Fine Guitar</p>
+            <i class="fa fa-youtube" aria-hidden="true"></i>
+        </div>
+    </a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+    <script src="tracks.json"></script>
+    <script src="index.js"></script>
+</body>
+</html>
