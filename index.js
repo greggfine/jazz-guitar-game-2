@@ -49,7 +49,7 @@
           getRandomName = (arr) => arr[Math.floor(Math.random() * guitaristNames.length)];
 
     function init() {
-        gainNode4.gain.value = 0;
+        gainNode4.gain.setValueAtTime(0, ctx.currentTime);
         startGameDisplay.style.display = 'none';
         whoIsThis.style.display = playGame.style.display = container.style.display = 'block';
         gameOverDisplay.textContent = '';
@@ -130,23 +130,10 @@
         buffer.stop(ctx.currentTime + 0.030);
     }
 
-    function revealFinalCorrectAnswer() {
-        displayImage();
-        displayName();
-        gainNode.gain.setTargetAtTime(0, ctx.currentTime, 0.030);
-        var isSafari = window.safari !== undefined;
-        if (isSafari) {
-            buffer.disconnect(ctx.destination);
-        } else {
-            buffer.stop(ctx.currentTime);
-        }
-    }
-    
     function setupNextQuestion(){
         revealCorrectAnswer();
         setTimeout(() => {
             if(questionCountCounter === 10) {
-                removeNameText();
                 setGameOver();
             } else{
                 questionCount.textContent = `${questionCountCounter += 1}/10`;
@@ -166,7 +153,6 @@
     }
 
     function setGameOver(){
-        revealFinalCorrectAnswer();
         setTimeout(() => {
             gameOverSFXBuffer = ctx.createBufferSource();
             getAudioData('./audio/sfx/game_over/Cutting Power.mp3', gameOverSFXBuffer);
@@ -245,7 +231,10 @@
             livesCount -= 1;
             if(livesCount === 0){
                 lives.textContent = 0;
-                setGameOver();
+                revealCorrectAnswer();
+                setTimeout(() => {
+                    setGameOver();
+                }, 1000);
             } else{
                 lives.textContent = livesCount;
                 setupNextQuestion();
