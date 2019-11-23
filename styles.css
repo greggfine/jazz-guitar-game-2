@@ -221,6 +221,11 @@ img {
   top: 17px;
 }
 
+.play-again-btn span {
+  position: relative;
+  top: 0px;
+}
+
 .youtube-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
